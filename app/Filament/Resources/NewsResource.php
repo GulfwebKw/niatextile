@@ -20,7 +20,7 @@ class NewsResource extends Resource
     use Translatable;
     protected static ?string $model = News::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'far-newspaper';
 
     public static function form(Form $form): Form
     {
