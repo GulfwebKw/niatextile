@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ProductResource\Pages;
-use App\Filament\Resources\ProductResource\RelationManagers;
-use App\Models\Product;
+use App\Filament\Resources\NewsResource\Pages;
+use App\Filament\Resources\NewsResource\RelationManagers;
+use App\Models\News;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -15,10 +15,10 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ProductResource extends Resource
+class NewsResource extends Resource
 {
     use Translatable;
-    protected static ?string $model = Product::class;
+    protected static ?string $model = News::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -26,20 +26,22 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-
                 TextInput::make('title')
                     ->required(),
-                Forms\Components\FileUpload::make('image')
-                    ->image()
-                    ->directory('products/'.now()->format('Y/m/d'))
-                    ->imageEditor()
+                TextInput::make('sub_title')
                     ->nullable(),
                 \Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor::make('content')
                     ->columnSpan(2)
                     ->required(),
+                Forms\Components\Textarea::make('short_content')
+                    ->rows(3)
+                    ->required(),
+                Forms\Components\FileUpload::make('image')
+                    ->image()
+                    ->directory('News/'.now()->format('Y/m/d'))
+                    ->imageEditor()
+                    ->nullable(),
                 Forms\Components\Checkbox::make('is_active')
-                    ->inline(),
-                Forms\Components\Checkbox::make('use_inside_homepage')
                     ->inline(),
             ]);
     }
@@ -53,7 +55,8 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('title')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\BooleanColumn::make('use_inside_homepage'),
+                Tables\Columns\TextColumn::make('short_content')
+                    ->searchable(),
                 Tables\Columns\BooleanColumn::make('is_active'),
             ])
             ->filters([
@@ -62,8 +65,6 @@ class ProductResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
-            ->reorderable('ordering')
-            ->paginatedWhileReordering(false)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
@@ -81,9 +82,9 @@ class ProductResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListProducts::route('/'),
-            'create' => Pages\CreateProduct::route('/create'),
-            'edit' => Pages\EditProduct::route('/{record}/edit'),
+            'index' => Pages\ListNews::route('/'),
+            'create' => Pages\CreateNews::route('/create'),
+            'edit' => Pages\EditNews::route('/{record}/edit'),
         ];
     }
 }
