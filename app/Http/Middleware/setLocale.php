@@ -15,7 +15,7 @@ class setLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ( $request->routeIs([ 'home' ,'aboutUs' ,'products' ,'news'  ,'contactsUs' , 'subscribe']))
+        if ( $request->routeIs([ 'home' ,'aboutUs' ,'products' ,'news'  ,'contactsUs' , 'subscribe' , 'contactsUsSend']))
             app()->setLocale($request->cookie('locale','en'));
         else
             app()->setLocale('en');
