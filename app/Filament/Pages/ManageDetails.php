@@ -14,6 +14,7 @@ use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Pages\SettingsPage;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\HtmlString;
 
 class ManageDetails extends SettingsPage
@@ -99,7 +100,7 @@ class ManageDetails extends SettingsPage
                                     ->label('Show latest post of instagram?')
                                     ->nullable(),
                                 TextInput::make('instagram_user_id')
-                                    ->hint(new HtmlString('Get user id from: <a href="https://instagram.com/username/" target="_blank">https://instagram.com/username/</a>'))
+                                    ->hint(new HtmlString('Get user id from: <a href="https://commentpicker.com/instagram-user-id.php" target="_blank">https://commentpicker.com/instagram-user-id.php</a>'))
                                     ->nullable(),
                                 TextInput::make('instagram_access_token')
                                     ->nullable(),
@@ -184,25 +185,16 @@ class ManageDetails extends SettingsPage
                                             ->required(),
                                         TextInput::make('country_name_ar')
                                             ->required(),
-                                        Repeater::make('branches')
+                                        TextInput::make('address_en')
+                                            ->required(),
+                                        TextInput::make('address_ar')
+                                            ->required(),
+                                        Repeater::make('phones')
                                             ->columns(2)
                                             ->columnSpan(2)
                                             ->schema([
-                                                TextInput::make('title_en')
+                                                TextInput::make('phone')
                                                     ->required(),
-                                                TextInput::make('title_ar')
-                                                    ->required(),
-                                                TextInput::make('address_en')
-                                                    ->required(),
-                                                TextInput::make('address_ar')
-                                                    ->required(),
-                                                Repeater::make('phones')
-                                                    ->columns(2)
-                                                    ->columnSpan(2)
-                                                    ->schema([
-                                                        TextInput::make('phone')
-                                                            ->required(),
-                                                    ]),
                                             ]),
                                     ])
                                     ->columnSpanFull(),
