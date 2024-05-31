@@ -16,6 +16,7 @@ return new class extends Migration
             $table->json('title')->nullable();
             $table->json('content')->nullable();
             $table->string('image')->nullable();
+            $table->string('vertical_image')->nullable();
             $table->boolean('use_inside_homepage')->default(false);
             $table->boolean('is_active')->default(true);
             $table->unsignedInteger('ordering')->default(0);

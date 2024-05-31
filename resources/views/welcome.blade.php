@@ -39,7 +39,7 @@
 
                             @foreach(\App\Models\Product::query()->where('is_active',true)->where('use_inside_homepage',true)->orderBy('ordering')->get() as $product)
                             <div class="my_card">
-                                <a href="#"><img src="{{ asset('storage/'.$product->image) }}" alt="">
+                                <a href="#"><img src="{{ asset('storage/'.$product->vertical_image) }}" alt="">
                                     <span class="transition overlay">
                                     <h5>{{ $product->title }}</h5>
                                     <p>{!! $product->content !!}</p>

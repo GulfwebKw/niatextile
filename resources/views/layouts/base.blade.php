@@ -45,12 +45,12 @@
                                 <a href="#" class="menu-close">&times;</a>
 
                                 <ul>
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="aboutus.html">About us</a></li>
-                                    <li><a href="product.html">Products</a></li>
-                                    <li><a href="news.html">News</a></li>
-                                    <li><a href="contact.html">Contact us</a></li>
-                                    <li><a href="arindex.html" class="arabic">العربية</a></li>
+                                    <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
+                                    <li><a href="{{ route('aboutUs') }}">{{ __('About us') }}</a></li>
+                                    <li><a href="{{ route('products') }}">{{ __('Products') }}</a></li>
+                                    <li><a href="news.html">{{ __('News') }}</a></li>
+                                    <li><a href="contact.html">{{ __('Contacts us') }}</a></li>
+                                    <li><a href="arindex.html" class="arabic">{{ __('OtherLang') }}</a></li>
                                 </ul>
                             </div>
                         </nav>
@@ -58,12 +58,12 @@
 
                     <div class="col-12 col-lg-12 col-md-12 text-center">
                         <div class="menu m_hide desk_show">
-                            <a href="index.html" class="menu_active">Home</a>
-                            <a href="aboutus.html">About us</a>
-                            <a href="product.html">Products</a>
-                            <a href="news.html">News</a>
-                            <a href="contact.html">Contacts us</a>
-                            <a href="arindex.html" class="arabic">العربية</a>
+                            <a href="{{ route('home') }}" @if(request()->routeIs('home')) class="menu_active" @endif>{{ __('Home') }}</a>
+                            <a href="{{ route('aboutUs') }}" @if(request()->routeIs('aboutUs')) class="menu_active" @endif>{{ __('About us') }}</a>
+                            <a href="{{ route('products') }}" @if(request()->routeIs('products')) class="menu_active" @endif>{{ __('Products') }}</a>
+                            <a href="news.html" @if(request()->routeIs('news')) class="menu_active" @endif>{{ __('News') }}</a>
+                            <a href="contact.html" @if(request()->routeIs('contactsUs')) class="menu_active" @endif>{{ __('Contacts us') }}</a>
+                            <a href="arindex.html" class="arabic">{{ __('OtherLang') }}</a>
                         </div>
 
                     </div>
@@ -74,21 +74,19 @@
 
 
         @hasSection('breadcrumb')
-            <!--===== WElCOME STARTS=======-->
-            <div class="welcomeabout-area">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="welcomeaboiut2 text-center">
-                            <h1 class="font-lora font-60 lineh-64 weight-500 color margin-b24">@yield("title")</h1>
-                            <p class="font-20 weight-500 font-ks lineh-20 color">
-                                <a href="{{ route('home') }}" class="color">Home</a>
-                                @yield("breadcrumb")
-                            </p>
+            <!-- Breadcrumb -->
+            <section>
+                <div class="bred_bg">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-lg-12 text-center">
+                                <h1>@yield("title")</h1>
+                                <a href="{{ route('home') }}">{{ __('Home') }}</a> <i class="bred_arrow"></i> @yield("title")
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!--===== WElCOME END=======-->
+            </section>
         @endif
 
         @hasSection('body')

@@ -13,6 +13,7 @@ class Product extends Model
         'title',
         'content',
         'image',
+        'vertical_image',
         'use_inside_homepage',
         'is_active',
         'ordering',

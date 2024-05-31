@@ -29,14 +29,19 @@ class ProductResource extends Resource
 
                 TextInput::make('title')
                     ->required(),
+                \Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor::make('content')
+                    ->columnSpan(2)
+                    ->required(),
                 Forms\Components\FileUpload::make('image')
                     ->image()
                     ->directory('products/'.now()->format('Y/m/d'))
                     ->imageEditor()
                     ->nullable(),
-                \Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor::make('content')
-                    ->columnSpan(2)
-                    ->required(),
+                Forms\Components\FileUpload::make('vertical_image')
+                    ->image()
+                    ->directory('products/'.now()->format('Y/m/d'))
+                    ->imageEditor()
+                    ->nullable(),
                 Forms\Components\Checkbox::make('is_active')
                     ->inline(),
                 Forms\Components\Checkbox::make('use_inside_homepage')
@@ -68,7 +73,7 @@ class ProductResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ])->defaultSort('id' , 'desc');
+            ])->defaultSort('ordering');
     }
 
     public static function getRelations(): array

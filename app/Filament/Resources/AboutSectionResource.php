@@ -68,7 +68,7 @@ class AboutSectionResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ])->defaultSort('id' , 'desc');
+            ])->defaultSort('ordering' );
     }
 
     public static function getRelations(): array
