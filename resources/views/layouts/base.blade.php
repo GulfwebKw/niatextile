@@ -48,7 +48,7 @@
                                     <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
                                     <li><a href="{{ route('aboutUs') }}">{{ __('About us') }}</a></li>
                                     <li><a href="{{ route('products') }}">{{ __('Products') }}</a></li>
-                                    <li><a href="news.html">{{ __('News') }}</a></li>
+                                    <li><a href="{{ route('news') }}">{{ __('News') }}</a></li>
                                     <li><a href="{{ route('contactsUs') }}">{{ __('Contacts us') }}</a></li>
                                     <li><a href="{{ route('lang.switch' , app()->getLocale() == "en" ? "ar" : "en") }}" class="arabic">{{ __('OtherLang') }}</a></li>
                                 </ul>
@@ -61,7 +61,7 @@
                             <a href="{{ route('home') }}" @if(request()->routeIs('home')) class="menu_active" @endif>{{ __('Home') }}</a>
                             <a href="{{ route('aboutUs') }}" @if(request()->routeIs('aboutUs')) class="menu_active" @endif>{{ __('About us') }}</a>
                             <a href="{{ route('products') }}" @if(request()->routeIs('products')) class="menu_active" @endif>{{ __('Products') }}</a>
-                            <a href="news.html" @if(request()->routeIs('news')) class="menu_active" @endif>{{ __('News') }}</a>
+                            <a href="{{ route('news') }}" @if(request()->routeIs('news')) class="menu_active" @endif>{{ __('News') }}</a>
                             <a href="{{ route('contactsUs') }}" @if(request()->routeIs('contactsUs')) class="menu_active" @endif>{{ __('Contacts us') }}</a>
                             <a href="{{ route('lang.switch' , app()->getLocale() == "en" ? "ar" : "en") }}" class="arabic">{{ __('OtherLang') }}</a>
                         </div>

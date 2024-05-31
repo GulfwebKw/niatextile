@@ -6,6 +6,14 @@ Route::view('/', 'welcome')->name('home');
 Route::view('/about-us', 'aboutUs')->name('aboutUs');
 Route::view('/products', 'products')->name('products');
 Route::view('/contacts-us', 'contactsUs')->name('contactsUs');
+Route::view('/news', 'news')->name('news');
+Route::get('/news/{id}/{string?}', function ($id){
+    $news = \App\Models\News::query()
+        ->where('is_active', true)
+        ->where('id', $id)
+        ->firstOrFail();
+    return view('newsItem', ['news' => $news]);
+})->name('newsItem');
 
 
 
