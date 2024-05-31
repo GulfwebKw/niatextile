@@ -1,0 +1,117 @@
+.slide-menu-open {
+  margin: 50px 0 0 0;
+  position: absolute;
+  top: 0;
+  right: 45px;
+}
+.slide-menu-open i {
+  color: #fff;
+}
+
+.side-menu-wrapper {
+  /* style menu wrapper */
+  overflow: hidden;
+  background: #fcfbf7;
+  padding: 40px 0 0 0;
+  position: fixed; /* Fixed position */
+  top: 0;
+  right: -290px; /* Sidebar initial position. "right" for right positioned menu */
+  height: 100%;
+  z-index: 999;
+  transition: 0.5s; /* CSS transition speed */
+  width: 250px;
+  font-family: "gotham", sans-serif;
+  font-size: 18px;
+  letter-spacing: normal;
+  text-transform: uppercase;
+}
+
+.side-menu-wrapper > ul {
+  /* css ul list style */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto; /* enable scroll for menu items */
+  height: 95%;
+}
+
+.side-menu-wrapper > ul > li > a {
+  /* links */
+  display: block;
+  border-bottom: 1px solid #e1e1e1;
+  padding: 10px;
+  color: #212121;
+  background: #fcfbf7;
+  transition: 0.3s;
+  text-decoration: none;
+  height: 95%;
+  font-size: 16px;
+}
+
+.side-menu-wrapper > ul > li > a:hover,
+.side-menu-wrapper > ul > li > ul > li > a:hover,
+.side-menu-wrapper > ul > li > ul > li > ul > li > a:hover {
+  background: #d5d5d5;
+}
+
+.side-menu-wrapper > ul > li > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+}
+
+.side-menu-wrapper > ul > li > ul > li > a {
+  display: block;
+  border-bottom: 1px solid #082060;
+  padding: 10px 10px 10px 20px;
+  color: #212121;
+  background: #d5d5d5;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.side-menu-wrapper > ul > li > ul > li > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+}
+
+.side-menu-wrapper > ul > li > ul > li > ul > li > a {
+  display: block;
+  border-bottom: 1px solid #b9b9b9;
+  padding: 10px 10px 10px 35px;
+  color: #000;
+  background: #1d5c88;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.side-menu-wrapper > a.menu-close {
+  /* close button */
+  padding: 10px 0 20px 40px;
+  color: #212121;
+  display: block;
+  margin: -30px 0 -10px -20px;
+  font-size: 45px;
+  text-decoration: none;
+  text-align: left;
+}
+
+.side-menu-overlay {
+  /* overlay */
+
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow-y: auto;
+  overflow-x: hidden;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 1s;
+}
