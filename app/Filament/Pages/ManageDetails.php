@@ -14,6 +14,7 @@ use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Pages\SettingsPage;
+use Illuminate\Support\HtmlString;
 
 class ManageDetails extends SettingsPage
 {
@@ -39,6 +40,7 @@ class ManageDetails extends SettingsPage
                                 FileUpload::make('video')
                                     ->acceptedFileTypes(['video/mp4'])
                                     ->directory('home-page/video/'.now()->format('Y/m/d'))
+                                    ->rules(['file', 'max:992288'])
                                     ->nullable(),
                                 Repeater::make('slider')
                                     ->columns(2)
@@ -86,6 +88,25 @@ class ManageDetails extends SettingsPage
                                     ])
                                     ->columnSpanFull()
                                     ->columns(3),
+                            ]),
+                        Tabs\Tab::make('Instagram')
+                            ->columns(2)
+                            ->columnSpanFull()
+                            ->schema([
+                                TextInput::make('instagram_username')
+                                    ->required(),
+                                Forms\Components\Checkbox::make('instagram_active')
+                                    ->label('Show latest post of instagram?')
+                                    ->nullable(),
+                                TextInput::make('instagram_user_id')
+                                    ->hint(new HtmlString('Get user id from: <a href="https://instagram.com/username/" target="_blank">https://instagram.com/username/</a>'))
+                                    ->nullable(),
+                                TextInput::make('instagram_access_token')
+                                    ->nullable(),
+                                TextInput::make('instagram_cache_time')
+                                    ->numeric()
+                                    ->label('expire time of caching instagram posts. (Sec)')
+                                    ->nullable(),
                             ]),
                         Tabs\Tab::make('Addresses')
                             ->columns(2)
@@ -155,7 +176,9 @@ class ManageDetails extends SettingsPage
                                                     ->required(),
                                             ]),
                                     ]),
-                                Forms\Components\Repeater::make('socials')
+                                Forms\Components\Repeater::make('branches_other_country')
+                                    ->columnSpan(2)
+                                    ->columns(2)
                                     ->schema([
                                         TextInput::make('country_name_en')
                                             ->required(),
@@ -182,8 +205,7 @@ class ManageDetails extends SettingsPage
                                                     ]),
                                             ]),
                                     ])
-                                    ->columnSpanFull()
-                                    ->columns(3),
+                                    ->columnSpanFull(),
                             ]),
 
                     ]),
