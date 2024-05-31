@@ -50,7 +50,7 @@
                                     <li><a href="{{ route('products') }}">{{ __('Products') }}</a></li>
                                     <li><a href="news.html">{{ __('News') }}</a></li>
                                     <li><a href="contact.html">{{ __('Contacts us') }}</a></li>
-                                    <li><a href="arindex.html" class="arabic">{{ __('OtherLang') }}</a></li>
+                                    <li><a href="{{ route('lang.switch' , app()->getLocale() == "en" ? "ar" : "en") }}" class="arabic">{{ __('OtherLang') }}</a></li>
                                 </ul>
                             </div>
                         </nav>
@@ -63,7 +63,7 @@
                             <a href="{{ route('products') }}" @if(request()->routeIs('products')) class="menu_active" @endif>{{ __('Products') }}</a>
                             <a href="news.html" @if(request()->routeIs('news')) class="menu_active" @endif>{{ __('News') }}</a>
                             <a href="contact.html" @if(request()->routeIs('contactsUs')) class="menu_active" @endif>{{ __('Contacts us') }}</a>
-                            <a href="arindex.html" class="arabic">{{ __('OtherLang') }}</a>
+                            <a href="{{ route('lang.switch' , app()->getLocale() == "en" ? "ar" : "en") }}" class="arabic">{{ __('OtherLang') }}</a>
                         </div>
 
                     </div>
@@ -107,8 +107,23 @@
                     </div>
 
                     <div class="col-12 col-md-6 col-lg-6 text-right">
-                        <input type="text" class="sub_input" placeholder="{{ __('Enter_email_address') }}"><button class="sub_button">
-                        {{ __('Subscribe Now') }}</button>
+                        <form action="{{ route('subscribe') }}" method="POST">
+                            @csrf
+                            <input type="text" class="sub_input" name="email" value="{{ old('email') }}" placeholder="{{ __('Enter_email_address') }}">
+                            <button type="submit" class="sub_button">
+                                {{ __('Subscribe Now') }}
+                            </button>
+                        </form>
+                        @if(session()->has('success'))
+                            <div class="alert alert-success mt-3 text-center">
+                                {{ session()->get('success') }}
+                            </div>
+                        @endif
+                        @error('email')
+                        <div class="alert alert-danger mt-3 text-center">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
 
                 </div>
