@@ -105,26 +105,6 @@ class ManageDetails extends SettingsPage
                                         TextInput::make('phone')
                                             ->required(),
                                     ]),
-                                Repeater::make('branches')
-                                    ->columns(2)
-                                    ->columnSpan(2)
-                                    ->schema([
-                                        TextInput::make('title_en')
-                                            ->required(),
-                                        TextInput::make('title_ar')
-                                            ->required(),
-                                        TextInput::make('address_en')
-                                            ->required(),
-                                        TextInput::make('address_ar')
-                                            ->required(),
-                                        Repeater::make('phones')
-                                            ->columns(2)
-                                            ->columnSpan(2)
-                                            ->schema([
-                                                TextInput::make('phone')
-                                                    ->required(),
-                                            ]),
-                                    ]),
 
                                 Map::make('location')
                                     ->label('Location')
@@ -144,6 +124,7 @@ class ManageDetails extends SettingsPage
                                     ->markerColor("#22c55eff")
                                     ->showFullscreenControl()
                                     ->showZoomControl()
+                                    ->columnSpanFull()
                                     ->draggable()
                                     ->tilesUrl("https://tile.openstreetmap.de/{z}/{x}/{y}.png")
                                     ->zoom(10)
@@ -153,6 +134,26 @@ class ManageDetails extends SettingsPage
                                     ->extraControl([
                                         'zoomDelta'           => 1,
                                         'zoomSnap'            => 2,
+                                    ]),
+                                Repeater::make('branches')
+                                    ->columns(2)
+                                    ->columnSpan(2)
+                                    ->schema([
+                                        TextInput::make('title_en')
+                                            ->required(),
+                                        TextInput::make('title_ar')
+                                            ->required(),
+                                        TextInput::make('address_en')
+                                            ->required(),
+                                        TextInput::make('address_ar')
+                                            ->required(),
+                                        Repeater::make('phones')
+                                            ->columns(2)
+                                            ->columnSpan(2)
+                                            ->schema([
+                                                TextInput::make('phone')
+                                                    ->required(),
+                                            ]),
                                     ]),
                                 Forms\Components\Repeater::make('socials')
                                     ->schema([
