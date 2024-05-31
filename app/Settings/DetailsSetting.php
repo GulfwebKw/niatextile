@@ -9,6 +9,7 @@ class DetailsSetting extends Settings
 
     public ?string $title_en;
     public ?string $title_ar;
+    public ?string $logo;
     public ?string $main_address_en;
     public ?string $main_address_ar;
     public ?array $main_address_phones;

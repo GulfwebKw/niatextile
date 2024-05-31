@@ -38,6 +38,11 @@ class ManageDetails extends SettingsPage
                                     ->required(),
                                 TextInput::make('title_ar')
                                     ->required(),
+                                FileUpload::make('logo')
+                                    ->image()
+                                    ->directory('home-page/logo/'.now()->format('Y/m/d'))
+                                    ->imageEditor()
+                                    ->required(),
                                 FileUpload::make('video')
                                     ->acceptedFileTypes(['video/mp4'])
                                     ->directory('home-page/video/'.now()->format('Y/m/d'))
