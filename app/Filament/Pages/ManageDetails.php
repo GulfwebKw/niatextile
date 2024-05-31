@@ -3,12 +3,16 @@
 namespace App\Filament\Pages;
 
 use App\Settings\DetailsSetting;
+use Dotswan\MapPicker\Fields\Map;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Pages\SettingsPage;
 
 class ManageDetails extends SettingsPage
@@ -22,9 +26,20 @@ class ManageDetails extends SettingsPage
         return $form
             ->schema([
                 Tabs::make('Tabs')
+                    ->columnSpanFull()
                     ->tabs([
                         Tabs\Tab::make('Home Page')
+                            ->columns(2)
+                            ->columnSpanFull()
                             ->schema([
+                                TextInput::make('title_en')
+                                    ->required(),
+                                TextInput::make('title_ar')
+                                    ->required(),
+                                FileUpload::make('video')
+                                    ->acceptedFileTypes(['video/mp4'])
+                                    ->directory('home-page/video/'.now()->format('Y/m/d'))
+                                    ->nullable(),
                                 Repeater::make('slider')
                                     ->columns(2)
                                     ->columnSpan(2)
@@ -45,137 +60,131 @@ class ManageDetails extends SettingsPage
                                             ->directory('home-page/slider/'.now()->format('Y/m/d'))
                                             ->imageEditor()
                                             ->required(),
+                                        TextInput::make('link')
+                                            ->url()
+                                            ->nullable(),
                                     ]),
-
-                                TextInput::make('headerTitle')
-                                    ->required(),
-                                TextInput::make('headerSubTitle')
-                                    ->nullable(),
-                                TextInput::make('headerButtonLabel')
-                                    ->required(),
-                                TextInput::make('headerButtonLink')
-                                    ->url()
-                                    ->required(),
-                                \Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor::make('headerContent')
+                                Forms\Components\Repeater::make('socials')
+                                    ->schema([
+                                        TextInput::make('link')->required()->url(),
+                                        Select::make('icon')
+                                            ->required()
+                                            ->searchable()
+                                            ->options([
+                                                'facebook.svg' => 'Facebook',
+//                                                'fa-twitter' => 'Twitter',
+                                                'instagram.svg' => 'Instagram',
+//                                                'fa-linkedin' => 'LinkedIn',
+                                                'youtube.svg' => 'YouTube',
+//                                                'fa-pinterest' => 'Pinterest',
+                                                'snapchat.svg' => 'Snapchat',
+                                                'whatsapp.svg' => 'WhatsApp',
+//                                                'fa-skype' => 'Skype',
+//                                                'fa-telegram' => 'Telegram',
+                                            ]),
+                                        TextInput::make('help')->nullable(),
+                                    ])
                                     ->columnSpanFull()
-                                    ->required(),
-                                FileUpload::make('HomePageHeaderImage')
-                                    ->image()
-                                    ->directory(now()->format('Y/m/d'))
-                                    ->imageEditor()
-                                    ->required(),
-
-                                TextInput::make('HomePageContactUsTitle')
-                                    ->required(),
-                                TextInput::make('HomePageContactUsSubTitle')
-                                    ->required(),
-                                Forms\Components\Textarea::make('HomePageContactUsContent')
-                                    ->required(),
+                                    ->columns(3),
                             ]),
-                        Tabs\Tab::make('About Us')
+                        Tabs\Tab::make('Addresses')
                             ->columns(2)
+                            ->columnSpanFull()
                             ->schema([
-                                TextInput::make('aboutUsTitle')
+                                TextInput::make('main_address_en')
                                     ->required(),
-                                TextInput::make('aboutUsSubTitle')
-                                    ->nullable(),
-                                TextInput::make('aboutUsButtonLabel')
+                                TextInput::make('main_address_ar')
                                     ->required(),
-                                TextInput::make('aboutUsButtonLink')
-                                    ->url()
+                                TextInput::make('main_address_email')
+                                    ->email()
                                     ->required(),
-                                \Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor::make('aboutUsContent')
-                                    ->columnSpanFull()
-                                    ->required(),
-                                FileUpload::make('aboutUsImage')
-                                    ->image()
-                                    ->directory(now()->format('Y/m/d'))
-                                    ->imageEditor()
-                                    ->required(),
-                            ]),
-                        Tabs\Tab::make('Services')
-                            ->columns(2)
-                            ->schema([
-                                TextInput::make('servicesTitle')
-                                    ->required(),
-                                TextInput::make('servicesSubTitle')
-                                    ->nullable(),
-                                \Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor::make('servicesContent')
-                                    ->columnSpanFull()
-                                    ->required(),
-                                FileUpload::make('servicesImage')
-                                    ->image()
-                                    ->directory(now()->format('Y/m/d'))
-                                    ->imageEditor()
-                                    ->required(),
-                            ]),
-                        Tabs\Tab::make('Industries')
-                            ->columns(2)
-                            ->schema([
-                                TextInput::make('industriesTitle')
-                                    ->required(),
-                                TextInput::make('industriesSubTitle')
-                                    ->nullable(),
-                                TextInput::make('industriesButtonLabel')
-                                    ->required(),
-                                TextInput::make('industriesButtonLink')
-                                    ->url()
-                                    ->required(),
-                                \Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor::make('industriesContent')
-                                    ->columnSpanFull()
-                                    ->required(),
-                                Repeater::make('industriesList')
+                                Repeater::make('main_address_phones')
                                     ->columns(2)
                                     ->columnSpan(2)
                                     ->schema([
-                                        TextInput::make('title')
+                                        TextInput::make('phone')
                                             ->required(),
                                     ]),
-                                FileUpload::make('industriesImage')
-                                    ->image()
-                                    ->directory(now()->format('Y/m/d'))
-                                    ->imageEditor()
-                                    ->required(),
-                            ]),
-                        Tabs\Tab::make('Vision')
-                            ->columns(2)
-                            ->schema([
-                                TextInput::make('visionTitle')
-                                    ->required(),
-                                TextInput::make('visionButtonLabel')
-                                    ->required(),
-                                TextInput::make('visionButtonLink')
-                                    ->url()
-                                    ->required(),
-                                \Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor::make('visionContent')
-                                    ->columnSpanFull()
-                                    ->required(),
-                                FileUpload::make('visionImage')
-                                    ->image()
-                                    ->directory(now()->format('Y/m/d'))
-                                    ->imageEditor()
-                                    ->required(),
-                            ]),
-                        Tabs\Tab::make('Comments')
-                            ->columns(1)
-                            ->schema([
-                                Repeater::make('comments')
+                                Repeater::make('branches')
                                     ->columns(2)
-                                    ->columnSpanFull()
+                                    ->columnSpan(2)
                                     ->schema([
-                                        TextInput::make('from')
+                                        TextInput::make('title_en')
                                             ->required(),
-                                        TextInput::make('subFrom')
-                                            ->nullable(),
-                                        Forms\Components\Textarea::make('comment')
+                                        TextInput::make('title_ar')
                                             ->required(),
-                                        FileUpload::make('image')
-                                            ->image()
-                                            ->directory(now()->format('Y/m/d'))
-                                            ->imageEditor()
-                                            ->nullable(),
+                                        TextInput::make('address_en')
+                                            ->required(),
+                                        TextInput::make('address_ar')
+                                            ->required(),
+                                        Repeater::make('phones')
+                                            ->columns(2)
+                                            ->columnSpan(2)
+                                            ->schema([
+                                                TextInput::make('phone')
+                                                    ->required(),
+                                            ]),
                                     ]),
+
+                                Map::make('location')
+                                    ->label('Location')
+                                    ->afterStateUpdated(function (Get $get, Set $set, string|array|null $old, ?array $state): void {
+                                        $set('latitude', $state['lat']);
+                                        $set('longitude', $state['lng']);
+                                    })
+                                    ->afterStateHydrated(function ($state, $record, Set $set): void {
+                                        $set('location', ['lat' => $state['lat'], 'lng' => $state['lng']]);
+                                    })
+                                    ->extraStyles([
+                                        'min-height: 250px',
+                                        'border-radius: 5px'
+                                    ])
+                                    ->liveLocation()
+                                    ->showMarker()
+                                    ->markerColor("#22c55eff")
+                                    ->showFullscreenControl()
+                                    ->showZoomControl()
+                                    ->draggable()
+                                    ->tilesUrl("https://tile.openstreetmap.de/{z}/{x}/{y}.png")
+                                    ->zoom(10)
+                                    ->detectRetina()
+                                    ->showMyLocationButton()
+                                    ->extraTileControl([])
+                                    ->extraControl([
+                                        'zoomDelta'           => 1,
+                                        'zoomSnap'            => 2,
+                                    ]),
+                                Forms\Components\Repeater::make('socials')
+                                    ->schema([
+                                        TextInput::make('country_name_en')
+                                            ->required(),
+                                        TextInput::make('country_name_ar')
+                                            ->required(),
+                                        Repeater::make('branches')
+                                            ->columns(2)
+                                            ->columnSpan(2)
+                                            ->schema([
+                                                TextInput::make('title_en')
+                                                    ->required(),
+                                                TextInput::make('title_ar')
+                                                    ->required(),
+                                                TextInput::make('address_en')
+                                                    ->required(),
+                                                TextInput::make('address_ar')
+                                                    ->required(),
+                                                Repeater::make('phones')
+                                                    ->columns(2)
+                                                    ->columnSpan(2)
+                                                    ->schema([
+                                                        TextInput::make('phone')
+                                                            ->required(),
+                                                    ]),
+                                            ]),
+                                    ])
+                                    ->columnSpanFull()
+                                    ->columns(3),
                             ]),
+
                     ]),
             ]);
     }

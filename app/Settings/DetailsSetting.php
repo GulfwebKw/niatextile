@@ -21,8 +21,10 @@ class DetailsSetting extends Settings
     public string $instagram_username;
     public string $instagram_user_id;
     public string $instagram_access_token;
+    public string $instagram_cache_time;
     public array $clients;
     public array $socials;
+    public array $location;
 
     public static function group(): string
     {
