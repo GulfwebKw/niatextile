@@ -104,11 +104,13 @@
                     <h2 class="about-title text-center mb-50">{{ __('follow_instagram' , ['username' => $setting->instagram_username ]) }}</h2>
                     <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel"  data-interval="1000">
 
-                        <div class="MultiCarousel-inner">
-                            <div class="item">
-                                <a href="#"><img src="assets/img/01.png" alt=""></a>
+                        @foreach(\App\Helpers\Instagram::getLatestFeeds(10 , '<a href="{link}"><img src="{image}" alt=""></a>' ) as $feed )
+                            <div class="MultiCarousel-inner">
+                                <div class="item">
+                                    {!! $feed->html !!}
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
 
                         <button class="leftLst"><img src="{{ asset('assets/img/left.png') }}" alt="" class="img-auto"></button>
                         <button class="rightLst"><img src="{{ asset('assets/img/right.png') }}" alt="" class="img-auto"></button>
