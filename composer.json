@@ -18,7 +18,8 @@
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "mohamedsabil83/filament-forms-tinyeditor": "^2.3",
-        "owenvoke/blade-fontawesome": "^2.6"
+        "owenvoke/blade-fontawesome": "^2.6",
+        "timehunter/laravel-google-recaptcha-v3": "^2.5"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
