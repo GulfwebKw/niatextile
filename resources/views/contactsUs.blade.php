@@ -77,7 +77,7 @@
                         <h3 class="mb-20">{{ __('Send Message') }}</h3>
                         @if(session()->has('success2'))
                             <div class="alert alert-success mb-3 text-center">
-                                {{ session()->get('success') }}
+                                {{ session()->get('success2') }}
                             </div>
                         @endif
                         @error('email')
@@ -114,6 +114,9 @@
 
                             <textarea type="text" rows="6" class="my_input" name="message" placeholder="{{ __('Message *') }}" onblur="this.placeholder='{{ __('Message *') }}'" onfocus="this.placeholder=''">{{ old('message') }}</textarea>
 
+                            <div class="my-2">
+                                {!!  config('googlerecaptchav3.is_service_enabled') ? \TimeHunter\LaravelGoogleReCaptchaV3\Facades\GoogleReCaptchaV3::renderField('contact_us_id','contact_us_action') : '' !!}
+                            </div>
                             <button type="submit" class="butn">{{ __('SEND') }}</button>
                         </form>
                     </div>

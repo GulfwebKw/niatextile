@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use TimeHunter\LaravelGoogleReCaptchaV3\Validations\GoogleReCaptchaV3ValidationRule;
 
 Route::view('/', 'welcome')->name('home');
 Route::view('/about-us', 'aboutUs')->name('aboutUs');
@@ -31,7 +32,8 @@ Route::post('/contact-us', function (\Illuminate\Http\Request $request){
         'name'=>'required|string',
         'subject'=>'required|string',
         'message'=>'required|string|min:10',
-        'email'=>'required|email:rfc,dns'
+        'email'=>'required|email',
+        'g-recaptcha-response' => config('googlerecaptchav3.is_service_enabled') ? [new GoogleReCaptchaV3ValidationRule('contact_us_action')] : []
     ]);
     $message = new \App\Models\Message();
     $message->trade_account_number = $request->get('trade_account_number');
