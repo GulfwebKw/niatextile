@@ -64,7 +64,7 @@ return [
     |  -  false: the badge will be shown in the bottom right side
     |
     */
-    'inline' => false,
+    'inline' => true,
 
     /*
     |--------------------------------------------------------------------------

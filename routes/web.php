@@ -33,7 +33,7 @@ Route::post('/contact-us', function (\Illuminate\Http\Request $request){
         'subject'=>'required|string',
         'message'=>'required|string|min:10',
         'email'=>'required|email',
-        'g-recaptcha-response' => config('googlerecaptchav3.is_service_enabled') ? [new GoogleReCaptchaV3ValidationRule('contact_us_action')] : []
+        'g-recaptcha-response' => config('googlerecaptchav3.is_service_enabled') ? [new GoogleReCaptchaV3ValidationRule()] : []
     ]);
     $message = new \App\Models\Message();
     $message->trade_account_number = $request->get('trade_account_number');

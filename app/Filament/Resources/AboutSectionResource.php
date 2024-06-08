@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\AboutSectionResource\Pages;
 use App\Filament\Resources\AboutSectionResource\RelationManagers;
-use App\Models\AboutSection;
+use App\Models\aboutSection;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class AboutSectionResource extends Resource
 {
     use Translatable;
-    protected static ?string $model = AboutSection::class;
+    protected static ?string $model = aboutSection::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
