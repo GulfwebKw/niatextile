@@ -22,7 +22,7 @@ class Instagram
                     $id = $media_id->id;
                     $counter++;
                     if ($counter <= $count && $id) {
-                        $url = 'https://graph.instagram.com/'.$id.'?fields=thumbnail_url,media_url,permalink&amp&access_token='.$AccessToken;
+                        $url = 'https://graph.instagram.com/'.$id.'?fields=media_type,thumbnail_url,media_url,permalink&amp&access_token='.$AccessToken;
                         $ch = curl_init();
                         curl_setopt($ch, CURLOPT_URL, $url);
                         curl_setopt($ch, CURLOPT_HEADER, false);
@@ -33,9 +33,11 @@ class Instagram
                         $result_image = curl_exec($ch);
                         curl_close($ch);
                         $result_image = json_decode($result_image);
-                        $result_image->html = str_replace(['{link}', '{image}'], [$result_image->permalink, ($result_image->thumbnail_url ?? $result_image->media_url)], $output);
-                        $result_image->image = $result_image->thumbnail_url ?? $result_image->media_url;
-                        $return[] = $result_image;
+                        if( $result_image->media_type != "VIDEO") {
+                            $result_image->html = str_replace(['{link}', '{image}'], [$result_image->permalink, ($result_image->thumbnail_url ?? $result_image->media_url)], $output);
+                            $result_image->image = $result_image->thumbnail_url ?? $result_image->media_url;
+                            $return[] = $result_image;
+                        }
                     }
                 }
                 return $return;
